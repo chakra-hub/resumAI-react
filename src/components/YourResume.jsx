@@ -5,6 +5,7 @@ import jsPDF from 'jspdf'
 
 
 const YourResume = () => {
+  document.title = "ResumAI is Ready"
   const user = useSelector((store)=>store.user.user)
   let promptWorkHistory = `Prepare a work history section for my resume. I previously worked for ${user.prevComp} from ${user.timePrevComp} as a ${user.desgPrevComp} in team. Please list a few achievements for this role. I achieved ${user.achievements} in the previous job.
   Can you add more skills and make my achievements at these past roles sound smarter?`

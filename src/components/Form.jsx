@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import {updateUser} from '../utils/userSlice'
 const Form = () => {
+  document.title = "ResumAI - Form"
   const [submitted, setSubmitted] = useState(false)
   const dispatch = useDispatch();
     const user_details = {
@@ -85,19 +86,33 @@ const Form = () => {
       else if(!isNaN(values.institute)){
         error.institute="Institute must be string"
       }
-      if(values.prevComp!=='' && !isNaN(values.prevComp)){
-        error.prevComp="Company Name be string"
+      if(values.prevComp=='') {
+        error.prevComp="Company Name can't be null"
+      }else if(!isNaN(values.prevComp)){
+        error.prevComp="Company Name must be string"
       }
-      if(values.timePrevComp!=='' && !values.timePrevComp.includes('to')){
+      if(values.timePrevComp==''){
+        error.timePrevComp="Timeline can't be null"
+      }
+      else if(!values.timePrevComp.includes('to')){
         error.timePrevComp="Timeline must be in YYYY to YYYY format"
       }
-      if(values.desgPrevComp!=='' && !isNaN(values.desgPrevComp)){
+      if(values.desgPrevComp==''){
+        error.desgPrevComp="Designation can't be null"
+      }
+      else if(!isNaN(values.desgPrevComp)){
         error.desgPrevComp="Designation must be a string"
       }
-      if(values.achievements!=='' && !isNaN(values.achievements)){
+      if(values.achievements==''){
+        error.achievements="Achievements can't be null"
+      }
+      else if(!isNaN(values.achievements)){
         error.achievements="Achievements must be a string"
       }
-      if(values.certifications!=='' && !isNaN(values.certifications)){
+      if(values.certifications==''){
+        error.certifications="Certifications can't be null"
+      }
+      else if(!isNaN(values.certifications)){
         error.certifications="Certifications must be a string"
       }
       return error;
@@ -318,7 +333,6 @@ const Form = () => {
           <div>
             <button className="submit_btn" onClick={()=>setSubmitted(true)}>Submit</button>
             <Link to="/your-resume"><button className='generate_btn'>generate</button></Link>
-            {console.log(user.name)} 
           </div>
           {Object.keys(allError).length==0 && user.name && user.phone && user.email && user.linkedin && user.currdesignation && user.relocate && user.degree && user.institute && submitted ?<div className='submitted_msg'>Your Details have been submitted. Click on generate button to get your resume</div>:<></>}
         </form>
